@@ -24,10 +24,6 @@
     width: 100%;
 }
 
-.game:not(:last-child) {
-    margin-bottom: 3rem;
-}
-
 .game__cover {
     width: 100%;
     height: 30rem;
