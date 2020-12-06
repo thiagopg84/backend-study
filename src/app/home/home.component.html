@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="games">
+        <div class="game" *ngFor="let game of games">
+            <div class="game__cover" style="background-image: url({{game.gamecover}});">
+            </div>
+            <div class="game__name">
+               <p>{{game.gamename}}</p>
+            </div>
+            <div class="game__transaction">
+                <div class="game__price" *ngIf="game.sale">R$ {{game.gameprice}}</div>
+                <div class="game__price" *ngIf="!game.sale">Trade</div>
+            </div>
+            <div class="game__owner">{{getUser(game.userid).email}}</div>
+        </div>
+    </div>
+</div>

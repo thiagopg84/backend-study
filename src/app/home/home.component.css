@@ -1,0 +1,64 @@
+.container {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 4rem;
+}
+
+.games {
+    display: flex;
+    align-items: flex-start;
+    max-width: 120rem;
+    margin: 0 auto;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: indigo;
+    padding: 1rem;
+    max-width: 30rem;
+    width: 100%;
+}
+
+.game:not(:last-child) {
+    margin-bottom: 3rem;
+}
+
+.game__cover {
+    width: 100%;
+    height: 30rem;
+    background-position: center;
+    background-size: cover;
+}
+
+.game__name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.game__name p {
+    text-align: center;
+}
+
+.game__transaction {
+
+}
+
+.game__price {
+    font-size: 3rem;
+    font-weight: 500;
+    color: blueviolet;
+    
+    margin-bottom: 1rem;
+}
+
+.game__owner {
+    font-size: 2rem;
+    color: white;
+}
