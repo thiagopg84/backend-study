@@ -1,6 +1,6 @@
 export class Game {
     constructor(
-        public id: string,
+        public id: number,
         public gameconsole: string,
         public gamecover: string,
         public gamename: string,
@@ -10,6 +10,5 @@ export class Game {
         public sale: boolean,
         public whatsapp: boolean,
         public userid: number     
-        ) {
-    }
+    ) {}
 }

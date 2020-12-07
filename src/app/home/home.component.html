@@ -1,3 +1,9 @@
+<div class="top-bar">
+    <div class="top-bar__container">
+        <a (click)="modalGame = !modalGame">Add Game</a>
+        <a (click)="modalUser = !modalUser">Add User</a>
+    </div>
+</div>
 <div class="container">
     <div class="games">
         <div class="game" *ngFor="let game of games">
@@ -10,7 +16,65 @@
                 <div class="game__price" *ngIf="game.sale">R$ {{game.gameprice}}</div>
                 <div class="game__price" *ngIf="!game.sale">Trade</div>
             </div>
-            <div class="game__owner" *ngIf="users.length > 0">{{getUser(game.userid).email}}</div>
+            <!-- <div class="game__owner" *ngIf="users.length > 0">{{getUser(game.userid).email}}</div> -->
         </div>
     </div>
+</div>
+
+<div class="modal" *ngIf="modalGame">
+    <div class="modal__container">
+        <form  [formGroup]="formGamesInfo" (ngSubmit)="onSubmit()">
+            <div class="form-item">
+                <label for="sale">Sale or trade?</label>
+                <input type="radio" name="sale" formControlName="sale" [value]="true" id="saleTrue" required>
+                <label for="saleTrue">Sale</label>
+                <input type="radio" name="sale" formControlName="sale" [value]="false" id="saleFalse" required>
+                <label for="saleFalse">Trade</label>
+            </div>
+
+            <div class="form-item" *ngIf="formGamesInfo.get('sale').value == true">
+                <label for="gamePrice">Game price:</label>
+                <input type="number" name="gamePrice" id="gamePrice" formControlName="gamePrice">
+            </div>
+            
+            <div class="form-item">
+                <label for="gameConsole">Game console:</label>
+                <input type="text" name="gameConsole" id="gameConsole" required formControlName="gameConsole">    
+            </div>
+            
+            <div class="form-item">
+                <label for="gameName">Game name:</label>
+                <input type="text" name="gameName" id="gameName" required formControlName="gameName">
+            </div>
+            
+            <div class="form-item">
+                <label for="gameCover">Game cover:</label>
+                <input type="text" name="gameCover" id="gameCover" required formControlName="gameCover">                
+            </div>
+
+            <div class="form-item">
+                <label for="email">Email?</label>
+                <input type="checkbox" name="email" id="email" formControlName="email">                
+            </div>
+
+            <div class="form-item">
+                <label for="fbMessenger">Fb Messenger?</label>
+                <input type="checkbox" name="fbMessenger" id="fbMessenger" formControlName="fbMessenger">                
+            </div>
+            
+            <div class="form-item">
+                <label for="whatsapp">WhatsApp?</label>
+                <input type="checkbox" name="whatsapp" id="whatsapp" formControlName="whatsapp">                
+            </div>
+            
+            <button type="submit" [disabled]="!formGamesInfo.valid || (formGamesInfo.get('email').value == false && formGamesInfo.get('fbMessenger').value == false && formGamesInfo.get('whatsapp').value == false)">Submit</button>
+            
+            
+
+        </form>
+    </div>
+</div>
+
+<div class="modal" *ngIf="modalUser">
+
 </div>

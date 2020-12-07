@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { GetDbService } from '../get-db.service';
 import { Game } from '../shared/models/game.model';
 import { User } from '../shared/models/user.model';
+import { tap } from 'rxjs/operators';
+import { SelectorListContext } from '@angular/compiler';
+import { HttpHeaders } from '@angular/common/http';
+import { GameInterface } from '../shared/models/game-interface';
 
 @Component({
   selector: 'app-home',
@@ -10,27 +15,54 @@ import { User } from '../shared/models/user.model';
 })
 export class HomeComponent implements OnInit {
 
-  games: Game[] = [];
+  // games: Game[] = [];
+  games: GameInterface[];
   users: User[] = [];
+  modalUser: boolean = false;
+  modalGame: boolean = false;
 
-  constructor(private getDb: GetDbService) { }
+  formGamesInfo = this.forms.group({
+    sale: [null, Validators.required],
+    gamePrice: [null],
+    gameConsole: ['', Validators.required],
+    gameName: ['', Validators.required],
+    gameCover: ['', Validators.required],
+    email: [false],
+    fbMessenger: [false],
+    whatsapp: [false]
+  })
+
+  constructor(private getDb: GetDbService, private forms: FormBuilder) { }
 
   ngOnInit(): void {
-    this.getDb.getGames().subscribe(games => {
-      games.forEach(game => {
-        this.games.push(new Game(
-          game[0],
-          game[1],
-          game[2],
-          game[3],
-          game[4],
-          game[5],
-          game[6],
-          game[7],
-          game[8],
-          game[9]))
+    this.formGamesInfo.get('sale').valueChanges.pipe(
+      tap((sale: boolean) => {
+        if (sale) {
+          this.formGamesInfo.get('gamePrice').setValidators(Validators.required);
+        } else {
+          this.formGamesInfo.get('gamePrice').clearValidators();
+        }
+        this.formGamesInfo.get('gamePrice').updateValueAndValidity();
       })
-      console.log(this.games)
+    ).subscribe();
+
+    this.getDb.getGames().subscribe(games => {
+      // games.forEach(game => {
+      //   this.games.push(new Game(
+      //     game.id,
+      //     game.gameconsole,
+      //     game.gamecover,
+      //     game.gamename,
+      //     game.email,
+      //     game.fbmessenger,
+      //     game.gameprice,
+      //     game.sale,
+      //     game.whatsapp,
+      //     game.userid
+      //   ));
+      // })
+      this.games = games;
+      console.log(this.games);
     });
 
     this.getDb.getUsers().subscribe(users => {
@@ -45,7 +77,7 @@ export class HomeComponent implements OnInit {
           user[6]
         ));
       })
-      console.log(this.users)
+      console.log(this.users);
     })
   }
 
@@ -57,5 +89,15 @@ export class HomeComponent implements OnInit {
       }
     });
     return user;
+  }
+
+  onSubmit() {
+    let formObj = this.formGamesInfo.getRawValue();
+    let serializedForm = JSON.stringify(formObj);
+    console.log(serializedForm);
+
+    this.getDb.postGame(serializedForm).subscribe(response => {
+      console.log(response);
+    })
   }
 }

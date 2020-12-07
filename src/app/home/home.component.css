@@ -1,3 +1,36 @@
+.top-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: indigo;
+    height: 5rem;
+}
+
+.top-bar__container {
+    max-width: 120rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.top-bar__container a {
+    text-decoration: none;
+    transition: all .2s ease-out;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.top-bar__container a:hover,
+.top-bar__container a:active {
+    color: blueviolet;
+}
+
+.top-bar__container a:first-child {
+    margin-right: 2rem;
+}
+
 .container {
     width: 100%;
     min-height: 100vh;
@@ -22,6 +55,7 @@
     padding: 1rem;
     max-width: 30rem;
     width: 100%;
+    margin: 1rem;
 }
 
 .game__cover {
@@ -42,9 +76,9 @@
     text-align: center;
 }
 
-.game__transaction {
+/* .game__transaction {
 
-}
+} */
 
 .game__price {
     font-size: 3rem;

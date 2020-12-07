@@ -4,7 +4,7 @@ export class User {
         public avatar: string,
         public city: string,
         public email: string,
-        public fbmessenger: string,
+        public fbMessenger: string,
         public state: string,
         public whatsapp: number
         ) {
