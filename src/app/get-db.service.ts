@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GameInterface } from '../app/shared/models/game-interface'
+import { UserInterface } from './shared/models/user-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class GetDbService {
   }
 
   getUsers() {
-    return this.http.get<any[]>('http://127.0.0.1:5000/allusers');
+    return this.http.get<UserInterface[]>('http://127.0.0.1:5000/allusers');
   }
 
   postGame(game: string) {
@@ -28,5 +29,11 @@ export class GetDbService {
 
     return this.http.post('http://127.0.0.1:5000/creategame', game, { headers, responseType: 'text'});
     // return this.http.post('http://127.0.0.1:5000/creategame', game); --- caso eu queira receber o mesmo tipo que foi enviado
+  }
+
+  postUser(user: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+
+    return this.http.post('http://127.0.0.1:5000/createuser', user, { headers, responseType: 'text'});
   }
 }

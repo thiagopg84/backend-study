@@ -23,7 +23,7 @@
 
 <div class="modal" *ngIf="modalGame">
     <div class="modal__container">
-        <form  [formGroup]="formGamesInfo" (ngSubmit)="onSubmit()">
+        <form  [formGroup]="formGamesInfo" (ngSubmit)="onSubmitGame()">
             <div class="form-item">
                 <label for="sale">Sale or trade?</label>
                 <input type="radio" name="sale" formControlName="sale" [value]="true" id="saleTrue" required>
@@ -76,5 +76,41 @@
 </div>
 
 <div class="modal" *ngIf="modalUser">
+    <div class="modal__container">
+        <form  [formGroup]="formUserInfo" (ngSubmit)="onSubmitUser()">
+            <div class="form-item">
+                <label for="email">Email:</label>
+                <input type="text" name="email" formControlName="email" required> 
+            </div>
+            
+            <div class="form-item">
+                <label for="fbmessenger">Fb Messenger:</label>
+                <input type="text" name="fbmessenger" formControlName="fbmessenger" required>                
+            </div> 
+            
+            <div class="form-item">
+                <label for="whatsapp">WhatsApp:</label>
+                <input type="number" name="whatsapp" formControlName="whatsapp">
+            </div>
+            
+            <div class="form-item">
+                <label for="avatar">Avatar:</label>
+                <input type="text" name="avatar" formControlName="avatar">
+            </div>
 
+            <div class="form-item">
+                <label for="city">City:</label>
+                <input type="text" name="city" formControlName="city">       
+            </div>
+
+            <div class="form-item">
+                <label for="state">State:</label>
+                <input type="text" name="state" formControlName="state">
+            </div>            
+            <button type="submit" [disabled]="!formUserInfo.valid">Submit</button>
+            
+            
+
+        </form>
+    </div>
 </div>
