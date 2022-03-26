@@ -36,4 +36,21 @@ export class GetDbService {
 
     return this.http.post('http://127.0.0.1:5000/createuser', user, { headers, responseType: 'text'});
   }
+
+  getUser(user: string) {
+    const header = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
+    const headerDict = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    }
+    
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new HttpHeaders(headerDict), 
+    };
+    
+    return this.http.get<UserInterface>('http://127.0.0.1:5000/user', requestOptions)
+    // return this.http.get<UserInterface>('http://127.0.0.1:5000/user', {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Access-Control-Allow-Headers': 'Content-Type'}})
+
+  }
 }
